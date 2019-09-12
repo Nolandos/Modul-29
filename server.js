@@ -135,12 +135,11 @@ const findKennyAndDelete = function() {
 
 const findBennyAndRemove = function() {
     // find specific user and delete
-    return User.findOneAndRemove({ username: 'Benny_the_man' })
-        .then(function(user) {
-            return user.remove(function() {
-                console.log('User successfully deleted');
-            });
-        });
+    return User.findOneAndRemove({ username: 'Benny_the_man' }, function(err) {
+    	if (err) throw err;
+		
+		console.log('User deleted!');
+	});
 }
 
 Promise.all([kenny.save(), mark.save(), benny.save()])
